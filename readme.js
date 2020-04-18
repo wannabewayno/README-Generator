@@ -85,7 +85,7 @@ function createREADME(readmeData){
     readmeFile = ``;
     readmeFile += NAVBAR(readmeData);
     readmeFile += badges(readmeData.languages,readmeData.licenseName)
-    readmeFile += `<br>\n<br>\n # ${readmeData.projectName}\n`;
+    readmeFile += `# ${readmeData.projectName}\n`;
     readmeFile += ` > ${readmeData.description} \n`
     readmeFile += motivation(readmeData.motivation);
     readmeFile += scope(readmeData.scope);
