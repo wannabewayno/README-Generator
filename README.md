@@ -12,21 +12,20 @@
 # {{projectName}}
 > {{description}} 
 ### Motivation
-    {{motivation}}
+{{motivation}}
 ### Scope
-    {{scope}}
+{{scope}}
 ### What does this try to solve?
-    {{solutions}}
-##{{deployed}}
+{{solutions}}
+## {{deployed}}
 
 ## Installation
-    {{installation}}
-<h3 id="usage">Usage<h3>
+{{installation}}
+## Usage 
 {{usage}}
-<h3 id="contributing">Contributing</h3>
-    {{contributing}}
-<h3 id="license">License</h3>
+## Contributing
+{{contributing}}
+## License
 {{license}}
-
 ## Questions 
-    {{questions}}
+{{questions}}
