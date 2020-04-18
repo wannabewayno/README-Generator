@@ -77,7 +77,7 @@ function createREADME(readmeData){
         projectName: readmeData.projectName,
         email: readmeData.email,
     }
-    
+
     if (!readmeData.hasLICENSE){
         createLICENSE(readmeData.license,stamps)
     }
@@ -131,10 +131,10 @@ function NAVBAR(readmeData){
 
 function badges(languages,license){
    let badges = `<p align="center">\n`;
-    badges += `<img src="https://img.shields.io/badge/<License>-<${license}>-<blue>"/> `
+    badges += `<img src="https://img.shields.io/badge/License-${license}-blue"/> `
     Total = 0;
     if (typeof(languages)==="string"){
-        badges += `<img src="https://img.shields.io/badge/<${key}>-<flex>-<yellow>"/> `
+        badges += `<img src="https://img.shields.io/badge/${key}-flex-yellow"/> `
     } else {
         if (typeof(languages)==="object"){
             for (let key in languages){
@@ -143,7 +143,7 @@ function badges(languages,license){
         }
         if (typeof(languages)==="object"){
             for (let key in languages){
-                badges += `<img src="https://img.shields.io/badge/<${key}>-<${Math.round(languages[key]/Total)*100}%>-<yellow>"/> `
+                badges += `<img src="https://img.shields.io/badge/${key}-${Math.round(languages[key]/Total)*100}%-yellow"/> `
             }
         }
     }
