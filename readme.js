@@ -70,7 +70,6 @@ function createLICENSE(license,stamps){
 
 
 function createREADME(readmeData){
-    console.log(readmeData);
     stamps = {
         year: new Date().getFullYear(),
         owner: readmeData.licenseOwner,
@@ -87,7 +86,7 @@ function createREADME(readmeData){
 
     readmeFile = ``;
     readmeFile += NAVBAR(readmeData);
-    // readmeFile += badges(readmeData.languages,readmeData.licenseName)
+    readmeFile += badges(readmeData.languages,readmeData.licenseName)
     readmeFile += `# ${readmeData.projectName}\n`;
     readmeFile += ` > ${readmeData.description} \n`
     readmeFile += motivation(readmeData.motivation);
@@ -132,27 +131,27 @@ function NAVBAR(readmeData){
     return navbar;
 }
 
-// function badges(languages,license){
-//    let badges = `<p align="center">\n`;
-//     badges += `<img src="https://img.shields.io/badge/License-${license}-blue"/> `
-//     Total = 0;
-//     if (typeof(languages)==="string"){
-//         badges += `<img src="https://img.shields.io/badge/${key}-flex-yellow"/> `
-//     } else {
-//         if (typeof(languages)==="object"){
-//             for (let key in languages){
-//             Total += languages[key];
-//             }
-//         }
-//         if (typeof(languages)==="object"){
-//             for (let key in languages){
-//                 badges += `<img src="https://img.shields.io/badge/${key}-${Math.round(languages[key]/Total)*100}%-yellow"/> `
-//             }
-//         }
-//     }
-//     badges += `\n</p>\n\n`
-//     return badges;
-// }
+function badges(languages,license){
+   let badges = `<p align="center">\n`;
+    badges += `<img src="https://img.shields.io/badge/License-${license}-blue"/> `
+    Total = 0;
+    if (typeof(languages)==="string"){
+        badges += `<img src="https://img.shields.io/badge/${key}-flex-yellow"/> `
+    } else {
+        if (typeof(languages)==="object"){
+            for (let key in languages){
+            Total += languages[key];
+            }
+        }
+        if (typeof(languages)==="object"){
+            for (let key in languages){
+                badges += `<img src="https://img.shields.io/badge/${key}-${Math.round(languages[key]/Total)*100}%-yellow"/> `
+            }
+        }
+    }
+    badges += `\n</p>\n\n`
+    return badges;
+}
 
 
 function motivation(motivation){

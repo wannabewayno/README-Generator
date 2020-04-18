@@ -187,13 +187,11 @@ methods.isInstallation = answer => {
                     methods.readmeData.isInstallation = {};
                 }
                 methods.readmeData.counters.installationSteps++;
-                console.log(methods.readmeData.counters.installationSteps);
                 methods.readmeData.isInstallation[`step${methods.readmeData.counters.installationSteps}`] = answer;
-                console.log(methods.readmeData.isInstallation[`step${methods.readmeData.counters.installationSteps}`]);
+               
                 const offset = methods.readmeData.counters.installationSteps;
                 const questionOrderIndex = questions.order.indexOf(questions.addInstallStep);
                 questions.order.splice(questionOrderIndex+(offset*2)-1,0,questions.confirmInstallStep);
-                console.log(questions.order);
             })
             .catch(()=> {throw new Error("error occured adding an installation step")})
         }

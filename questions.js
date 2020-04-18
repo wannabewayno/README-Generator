@@ -30,7 +30,6 @@ questions.description = {
 }
 questions.languages = {
     type:"input",
-    
     name:"languages",
     message:"What was the main coding language used in this project?",
 }
