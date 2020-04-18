@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/wannabewayno/README-Generator"
   },
-  "homepage": "https://github.com/wannabewayno/README-Generator"
+  "homepage": "https://github.com/wannabewayno/README-Generator",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "inquirer": "^7.1.0",
+    "rxjs": "^6.5.5"
+  }
 }

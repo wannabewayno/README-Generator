@@ -187,11 +187,13 @@ methods.isInstallation = answer => {
                     methods.readmeData.isInstallation = {};
                 }
                 methods.readmeData.counters.installationSteps++;
+                console.log(methods.readmeData.counters.installationSteps);
                 methods.readmeData.isInstallation[`step${methods.readmeData.counters.installationSteps}`] = answer;
-
+                console.log(methods.readmeData.isInstallation[`step${methods.readmeData.counters.installationSteps}`]);
                 const offset = methods.readmeData.counters.installationSteps;
                 const questionOrderIndex = questions.order.indexOf(questions.addInstallStep);
                 questions.order.splice(questionOrderIndex+(offset*2)-1,0,questions.confirmInstallStep);
+                console.log(questions.order);
             })
             .catch(()=> {throw new Error("error occured adding an installation step")})
         }
@@ -206,14 +208,15 @@ methods.isInstallation = answer => {
                         const offset = methods.readmeData.counters.installationSteps;
                         const questionOrderIndex = questions.order.indexOf(questions.confirmInstallStep);
                         questions.order.splice(questionOrderIndex+(offset*2)-1,0,questions.addInstallStep);
+                        console.log(questions.order);
                     }
                 })
-                .catch(()=> {throw new Error("error occured confirming a new instalaltion step")})
+                .catch(()=> {throw new Error("error occured confirming a new installation step")})
             }
         // --------------------------------- adds an installation sentence --------------------------------------------
         methods.installSentence = answer => {
         return new Promise((resolve,reject)=>{
-            resolve(methods.isInstallation = answer);
+            resolve(methods.readmeData.isInstallation = answer);
             reject();
         })
         .catch(()=> {throw new Error("error occured adding a installation sentence")})
@@ -477,7 +480,6 @@ methods.chooseRepo = answer => {
         methods.readmeData.projectName = repoInfo.name;
         methods.readmeData.description = repoInfo.description;
         methods.readmeData.license = repoInfo.license;
-        console.log(methods.readmeData.license);
         methods.readmeData.isDeployed = repoInfo.homepage;
         // extracts urls for secondardy API calls.
         methods.readmeData.urls.contentURL = repoInfo.contents_url.slice(0,-8); //removes '/{+path} from the URL
