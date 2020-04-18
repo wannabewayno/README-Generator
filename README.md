@@ -19,13 +19,14 @@
     {{solutions}}
 ##{{deployed}}
 
-<h3 id="installation">Installation</h3>
-{{installation}}
+## Installation
+    {{installation}}
 <h3 id="usage">Usage<h3>
 {{usage}}
 <h3 id="contributing">Contributing</h3>
-{{contributing}}
+    {{contributing}}
 <h3 id="license">License</h3>
 {{license}}
-<h3 id="questions">Questions</h3>
-{{questions}}
+
+## Questions 
+    {{questions}}
