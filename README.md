@@ -6,7 +6,9 @@
 <a href="#Questions">Questions</a> |
 </p>
 <p align="center">
-<img src="https://img.shields.io/badge/License-undefined-blue"/> <img src="https://img.shields.io/badge/JavaScript-1-yellow"/> </p>
+<img src="https://img.shields.io/badge/License-undefined-blue"/> <img src="https://img.shields.io/badge/JavaScript-1-yellow"/>
+</p>
+
  # README-Generator
  > Node.js plugin that generates a README for your repository or project 
 ### Motivation 
