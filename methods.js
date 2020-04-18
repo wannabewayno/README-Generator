@@ -477,6 +477,7 @@ methods.chooseRepo = answer => {
         methods.readmeData.projectName = repoInfo.name;
         methods.readmeData.description = repoInfo.description;
         methods.readmeData.license = repoInfo.license;
+        console.log(methods.readmeData.license);
         methods.readmeData.isDeployed = repoInfo.homepage;
         // extracts urls for secondardy API calls.
         methods.readmeData.urls.contentURL = repoInfo.contents_url.slice(0,-8); //removes '/{+path} from the URL

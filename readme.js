@@ -147,7 +147,7 @@ function badges(languages,license){
             }
         }
     }
-    badges += `</p> \n\n`
+    badges += `\n</p>\n\n`
     return badges;
 }
 
