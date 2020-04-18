@@ -77,7 +77,10 @@ function createREADME(readmeData){
         projectName: readmeData.projectName,
         email: readmeData.email,
     }
-
+    if(typeof(readmeData.license)==="object"){
+        readmeData.licenseName = readmeData.license.name;
+        readmeData.license = readmeData.license.key;
+    }
     if (!readmeData.hasLICENSE){
         createLICENSE(readmeData.license,stamps)
     }

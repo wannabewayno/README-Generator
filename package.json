@@ -1,0 +1,19 @@
+{
+  "name": "@username/readme",
+  "version": "1.0.0",
+  "description": "A CLI readme Generator for your project",
+  "main": "readme.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wannabewayno/README-Generator.git"
+  },
+  "author": "Wayne Griffiths",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wannabewayno/README-Generator"
+  },
+  "homepage": "https://github.com/wannabewayno/README-Generator"
+}
