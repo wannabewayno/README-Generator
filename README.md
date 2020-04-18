@@ -31,4 +31,4 @@
  Copyright © 2020 sfsadfsdfdsf under the University of Illinois/NCSA Open Source License
 ## Questions 
  If you any questions about this project you can open an issue, contact wannabewayno or get in touch with 
- Wayne at email <img src="https://avatars2.githubusercontent.com/u/60007468?v=4" alt="avatar"style=" border-radius: 15px" width="50"/>
+ Wayne at email <img src="https://avatars2.githubusercontent.com/u/60007468?v=4" alt="avatar" style="border-radius: 15px" width="50px"/>

@@ -121,7 +121,7 @@ function NAVBAR(readmeData){
 
     for (const components in navComponents){
         if(navComponents[components]!==null && components !== "Logo"){
-            navbar+= `<a href="#${components}">${components}</a>\n`
+            navbar+= `<a href="#${components}">${components}</a> |\n`
         }
     }
     navbar += `</p>\n`
