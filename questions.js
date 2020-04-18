@@ -28,15 +28,21 @@ questions.description = {
     name:"description",
     message:"write a short description about your project (1 - 2 sentances)",
 }
-questions.deployed = {
-    type:'input',
-    name:'deployed',
-    message:'provide a href for your deployed application'
+questions.isDeployed = {
+    type:'confirm',
+    name:'isDeployed',
+    message:'is your application deployed on the web?'
 }
+    questions.deployed = {
+        type:'input',
+        name:'deployed',
+        message:'Great, provide a href to link your deployed application'
+    }
+
 questions.email = {
     type:'input',
     name:'email',
-    message:'provide an email for question inquires or hit enter to omit'
+    message:'provide an email for inquires about your project'
 }
 questions.projectName = {
     type:'input',
@@ -48,6 +54,147 @@ questions.languages = {
     name:'languages',
     message:'provide a comma seperated list of coding languages used in this project'
 }
+questions.chooseRepo = {
+    type:'list',
+    name:'chooseRepo',
+    message:'Choose a repository to create a README for',
+    choices:async function (){
+        const choices = await methods.readmeData.repositoryChoices;
+        return choices;
+    }
+}
+questions.motivation = {
+    type:'input',
+    name:'motivation',
+    message:'what was the motivation behind the project? (1 - 2 sentences)'
+}
+questions.scope = {
+    type:'input',
+    name:'motivation',
+    message:'What was the scope of the project (1 - 2 sentences)'
+};
+questions.solving = {
+    type:'input',
+    name:'motivation',
+    message:'what did this project attempted to solve? (1 - 2 sentences)'
+};
+questions.isInstallation = {
+    type:'confirm',
+    name:'isInstallation',
+    message:'Does your project require an Installation?'
+};
+    questions.typeInstallation = {
+        type:'list',
+        name:'typeInstallation',
+        message:'choose a way to describe your installation',
+        choices:[
+            {
+                name:"It's a brief sentence",
+                value:'sentence'
+            },
+            {
+                name:"I'd prefer to write step by step instructions",
+                value:'steps'
+            }
+        ]
+    }   
+        questions.installSentence = {
+        type:'input',
+        name:'installSentence',
+        message:"Describe how to install your project (1 - 2 sentences)"
+        }   
+
+        questions.addInstallStep = {
+            type:'input',
+            name:'addInstallStep',
+            message:"add a step (no need to label the steps, we got you)"
+        } 
+            questions.confirmInstallStep = {
+                type:'confirm',
+                name:'confirmInstallStep',
+                message:'add another step?'
+            }
+questions.isUsage = {
+    type:'confirm',
+    name:'isUsage',
+    message:'Does your project require an explanation on how to use?'
+};
+    questions.typeUsage = {
+        type:'list',
+        name:'typeUsage',
+        message:'choose a way to describe the Usage of this project',
+        choices:[
+            {
+                name:"It's a brief sentence",
+                value:'sentence'
+            },
+            {
+                name:"I'd prefer to write step by step instructions",
+                value:'steps'
+            }
+        ]
+    }
+        questions.usageSentence = {
+        type:'input',
+        name:'usageSentence',
+        message:"Describe how to use this project (1 - 2 sentences)"
+        }   
+        questions.addUsageStep = {
+            type:'input',
+            name:'addUsageStep',
+            message:"add a step (no need to label the steps, we got you)"
+        } 
+            questions.confirmUsageStep = {
+                type:'confirm',
+                name:'confirmUsageStep',
+                message:'add another step?'
+            }
+
+questions.isContributing = {
+    type:'confirm',
+    name:'isContributing',
+    message:'Does your project require information on how to contribute?'
+};
+    questions.typeContributing = {
+        type:'list',
+        name:'typeContributing',
+        message:'choose a way to describe how to contribute',
+        choices:[
+            {
+                name:"It's a brief sentence",
+                value:'sentence'
+            },
+            {
+                name:"I'd prefer to write step by step instructions",
+                value:'steps'
+            }
+        ]
+    }
+        questions.contributingSentence = {
+        type:'input',
+        name:'contributingSentence',
+        message:"Describe how to contribute to this project (1 - 2 sentences)"
+        }   
+        questions.addContributingStep = {
+            type:'input',
+            name:'addContributingStep',
+            message:"add a step (no need to label the steps, we got you)"
+        } 
+            questions.confirmContributingStep = {
+                type:'confirm',
+                name:'confirmContributingStep',
+                message:'add another step?'
+            }
+questions.isLogo = {
+    type:'confirm',
+    name:'isLogo',
+    message:'Would you like to add a Logo to your README?'
+}
+    questions.logo = {
+        type:'input',
+        name:'logo',
+        message:'Great, provide a path img src, relative or a link'
+    }
 questions.license = {
     type:"list",
     name:"addlicense",
@@ -186,11 +333,9 @@ questions.license = {
         }
     ]
 }
-
+// first two questions to be asked, the rest is dynamically added based on user choices.
 questions.order=[
     questions.username,
-    questions.startFrom,
-    questions.license,
-    questions.description
+    questions.startFrom
 ]
 
