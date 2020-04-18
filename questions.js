@@ -70,12 +70,12 @@ questions.motivation = {
 }
 questions.scope = {
     type:'input',
-    name:'motivation',
+    name:'scope',
     message:'What was the scope of the project (1 - 2 sentences)'
 };
 questions.solving = {
     type:'input',
-    name:'motivation',
+    name:'solving',
     message:'what did this project attempted to solve? (1 - 2 sentences)'
 };
 questions.isInstallation = {
@@ -195,6 +195,12 @@ questions.isLogo = {
         name:'logo',
         message:'Great, provide a path img src, relative or a link'
     }
+questions.licenseOwner = {
+    type:'input',
+    name:'licenseOwner',
+    message:'Please provide the full name of the License Owner'
+}    
+
 questions.license = {
     type:"list",
     name:"addlicense",

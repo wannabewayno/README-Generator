@@ -3,7 +3,6 @@ const axios = require("axios");
 const Rx = require("rxjs");
 const questions = require("./questions.js");
 const methods = require("./methods.js");
-const readmeData = {};
 
 //set up a subject obersable
 const prompts = new Rx.Subject();
@@ -18,14 +17,20 @@ inquirer.prompt(prompts).ui.process.subscribe(async function(answer){
 ,
 error=>{throw new Error("Whoa! something went terribly wrong")}
 ,
-complete => console.log("complete")
+complete => {
+    return new Promise((resolve,reject)=>{
+        resolve(createREADME(methods.readmeData))
+        reject(new Error("error returning the completed promise"))
+    })
+    .then(completed => console.log("You have answered all the questions \n Generating your README"))
+    .catch(error=>console.log(error))
+}
 );
 
 let questionIndex = 0;
 function nextQuestion(questionIndex){
     if (questionIndex >= questions.order.length){
-        prompts.complete();
-        createREADME();
+        prompts.complete()
     } else {    
         return questions.order[questionIndex];
     }
@@ -36,9 +41,7 @@ function nextQuestion(questionIndex){
 prompts.next(nextQuestion(questionIndex));
 
 
-function createREADME(){
-    console.log("testing to see if this is working");
-    console.log(readmeData.isInstallation);
-    console.log(readmeData.isInstallation.step1);
+function createREADME(readmeData){
+    
 
 }

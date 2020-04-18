@@ -24,6 +24,7 @@ methods.readmeData = {
     projectName:null,
     description:null,
     license:null,
+    licenseOwner:null,
     isDeployed:null,
     email:null,
     avatar:null,
@@ -99,7 +100,7 @@ methods.isDeployed = answer => {
 
 // --------------------------------- looks for deployed in answers -----------------------------
 methods.logo = answer => {return new Promise((resolve,reject)=>{
-    resolve(methods.readmeData.islogo = answer);
+    resolve(methods.readmeData.isLogo = answer);
     reject();
 })
 .catch(()=> {throw new Error("error occured adding a logo source")})
@@ -163,9 +164,10 @@ methods.isInstallation = answer => {
                 methods.readmeData.counters.installationSteps++;
                 methods.readmeData.isInstallation[`step${methods.readmeData.counters.installationSteps}`] = answer;
 
-                const questionOrderIndex = questions.order.indexOf(questions.addInstallStep);
                 const offset = methods.readmeData.counters.installationSteps;
-                questions.order.splice(questionOrderIndex+offset*2,0,questions.confirmInstallStep);
+                const questionOrderIndex = questions.order.indexOf(questions.addInstallStep);
+                questions.order.splice(questionOrderIndex+(offset*2)-1,0,questions.confirmInstallStep);
+                console.log(methods.readmeData.isInstallation[`step${methods.readmeData.counters.installationSteps}`]);
             })
             .catch(()=> {throw new Error("error occured adding an installation step")})
         }
@@ -179,7 +181,7 @@ methods.isInstallation = answer => {
                     if(answer){
                         const offset = methods.readmeData.counters.installationSteps;
                         const questionOrderIndex = questions.order.indexOf(questions.confirmInstallStep);
-                        questions.order.splice(questionOrderIndex+offset*2,0,questions.addInstallStep);
+                        questions.order.splice(questionOrderIndex+(offset*2)-1,0,questions.addInstallStep);
                     }
                 })
                 .catch(()=> {throw new Error("error occured confirming a new instalaltion step")})
@@ -239,7 +241,7 @@ methods.isUsage = answer => {
                 
                 const questionOrderIndex = questions.order.indexOf(questions.addUsageStep);
                 const offset = methods.readmeData.counters.usageSteps;
-                questions.order.splice(questionOrderIndex+offset*2,0,questions.confirmUsageStep);
+                questions.order.splice(questionOrderIndex+(offset*2)-1,0,questions.confirmUsageStep);
             })
             .catch(()=> {throw new Error("error occured adding a Usage step")})
         }
@@ -253,7 +255,7 @@ methods.isUsage = answer => {
                     if(answer){
                         const offset = methods.readmeData.counters.usageSteps;
                         const questionOrderIndex = questions.order.indexOf(questions.confirmUsageStep);
-                        questions.order.splice(questionOrderIndex+offset*2,0,questions.addUsageStep);
+                        questions.order.splice(questionOrderIndex+(offset*2)-1,0,questions.addUsageStep);
                     }
                 })
                 .catch(()=> {throw new Error("error occured confirming a new Usage step")})
@@ -261,7 +263,7 @@ methods.isUsage = answer => {
         // --------------------------------- adds an installation sentence --------------------------------------------
         methods.usageSentence = answer => {
         return new Promise((resolve,reject)=>{
-            resolve(methods.isUsage = answer);
+            resolve(methods.readmeData.isUsage = answer);
             reject();
         })
         .catch(()=> {throw new Error("error occured adding a usage sentence")})
@@ -313,7 +315,7 @@ methods.isContributing = answer => {
                 
                 const questionOrderIndex = questions.order.indexOf(questions.addContributingStep);
                 const offset = methods.readmeData.counters.contributingSteps;
-                questions.order.splice(questionOrderIndex+offset*2,0,questions.confirmContributingStep);
+                questions.order.splice(questionOrderIndex+(offset*2)-1,0,questions.confirmContributingStep);
             })
             .catch(()=> {throw new Error("error occured adding a contributing step")})
         }
@@ -327,7 +329,7 @@ methods.isContributing = answer => {
                     if(answer){
                         const offset = methods.readmeData.counters.contributingSteps;
                         const questionOrderIndex = questions.order.indexOf(questions.confirmContributingStep);
-                        questions.order.splice(questionOrderIndex+offset*2,0,questions.addContributingStep);
+                        questions.order.splice(questionOrderIndex+(offset*2)-1,0,questions.addContributingStep);
                     }
                 })
                 .catch(()=> {throw new Error("error occured confirming a new contributing step")})
@@ -335,7 +337,7 @@ methods.isContributing = answer => {
         // --------------------------------- adds an installation sentence --------------------------------------------
         methods.contributingSentence = answer => {
         return new Promise((resolve,reject)=>{
-            resolve(methods.isContributing = answer);
+            resolve(methods.readmeData.isContributing = answer);
             reject();
         })
         .catch(()=> {throw new Error("error occured adding a contributing sentence")})
@@ -465,6 +467,7 @@ methods.chooseRepo = answer => {
     .then(promises=>Promise.all(promises))   // waits for all promises to be resolved and then continues
     .then(resolvedPromises=>{
         // extracts useful information from second round of API calls.
+        methods.readmeData.licenseOwner = resolvedPromises[0].name;
         methods.readmeData.email = resolvedPromises[0].data.email;  // finds public user email if listed
         methods.readmeData.avatar = resolvedPromises[0].data.avatar_url; //gets users avatar
         methods.readmeData.languages = resolvedPromises[1].data;   // coding languages in this project

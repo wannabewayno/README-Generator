@@ -20,7 +20,7 @@ module.exports = readmeTemplate = `
     {{solutions}}
 ## {{deployed}}
 
-<h3 id="installation">Installation</h3>
+## Installation
     {{installation}}
 <h3 id="usage">Usage<h3>
     {{usage}}
@@ -28,7 +28,7 @@ module.exports = readmeTemplate = `
     {{contributing}}
 <h3 id="license">License</h3>
     {{license}}
-<h3 id="questions">Questions</h3>
+## Questions
     {{questions}}
 `
 
