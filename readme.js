@@ -201,5 +201,5 @@ function License(stamps,licenseName){
         return `## License\n Copyright \u00A9 ${stamps.year} ${stamps.owner} under the ${licenseName}\n`
 }
 function Questions(email,username,name,avatar){
-    return `## Questions \n If you any questions about this project you can open an issue, contact ${username} or get in touch with \n ${name} at ${email} <img src="${avatar}" alt="avatar"style=" border-radius: 15px" width="50"/>`
+    return `## Questions \n If you any questions about this project you can open an issue\n Contact ${username} \n or feel free to get in touch with \n ${name} at ${email} <img src="${avatar}" alt="avatar" style="border-radius:15px;" width="50px"/>`
 }
