@@ -1,4 +1,5 @@
 const axios = require('axios');
+const questions = require('./questions');
 
 
 function getRequest(path){ //a convenient function that creates an API call using axios to the GitHub API.
@@ -49,24 +50,73 @@ methods.readmeData = {
     description:null,
     license:null,
     deployed:null,
-    contentURL:null,
-    languageURL:null,
-    userURL:null,
     email:null,
     avatar:null,
     hasREADME:null
 }
-
-
-
+methods.readmeData.urls = {
+    contentURL:null,
+    languageURL:null,
+    userURL:null,
+}
 
 
 // --------------------------------- looks for username in answers ----------------------------------
-methods.username = answer => {return new Promise((resolve,reject) =>{
+methods.username = answer => {
+    return new Promise((resolve,reject) =>{
         resolve(methods.readmeData.username = answer);
         reject(error);
     })
+    .catch(()=> {throw new Error("error occured adding username")})
 };
+
+// -------------------------------- looks for addlicense in answers -------------------------------
+methods.addlicense = answer => {return new Promise((resolve,reject)=>{
+        resolve(methods.readmeData.license = answer);
+        reject();
+    })
+    .catch(()=> {throw new Error("error occured adding a license")})
+}
+// --------------------------------- looks for description in answers -----------------------------
+methods.description = answer => {return new Promise((resolve,reject)=>{
+        resolve(methods.readmeData.description = answer);
+        reject();
+    })
+    .catch(()=> {throw new Error("error occured adding a description")})
+}
+// --------------------------------- looks for deployed in answers -----------------------------
+methods.deployed = answer => {return new Promise((resolve,reject)=>{
+        resolve(methods.readmeData.deployed = answer);
+        reject();
+    })
+    .catch(()=> {throw new Error("error occured adding a deployment link")})
+}
+// --------------------------------- looks for email in answers -----------------------------
+methods.email = answer => {return new Promise((resolve,reject)=>{
+        resolve(methods.readmeData.email = answer);
+        reject();
+    })
+    .catch(()=> {throw new Error("error occured adding an email")})
+}
+// --------------------------------- looks for projectName in answers -----------------------------
+methods.projectName = answer => {
+    return new Promise((resolve,reject)=>{
+        resolve(methods.readmeData.projectName = answer);
+        reject();
+    })
+    .catch(()=> {throw new Error("error occured adding a project name")})
+}
+// --------------------------------- looks for languages in answers -----------------------------
+methods.languages = answer => {return new Promise((resolve,reject)=>{
+        resolve(answer);
+        reject();
+    })
+    .then(answer=>{
+        methods.readmeData.languages = answer.split(',');
+    })
+    .catch(()=> {throw new Error("error occured adding languages")})
+}
+
 //---------------------------------- looks for startFrom in answers ------------------------------
 methods.startFrom = answer => {
     console.log("hello");
@@ -80,15 +130,19 @@ methods.startFrom = answer => {
             resolve(getRequest(`https://api.github.com/users/${methods.readmeData.username}/repos`));
             reject(new Error());
         })
-        .then(response => methods.readmeData.repositories = response.data)
+        .then(response => {
+            methods.readmeData.repositories = response.data;
+            //TODO execute question sorting function here for user to pick a repo, then autofill information.
+        })
         .catch(error=>console.warn(`Error:${error.response.headers.status}, an error occured retrieving your github username`))
-        .then(next=>console.log(`a new thing`))
     } else {
         return new Promise ((resolve,reject)=>{
-            resolve(getRequest(`https://api.github.com/users/${methods.readmeData.username}/repos`));
+            resolve(getRequest(`https://api.github.com/users/${methods.readmeData.username}`));
             reject(new Error());
         })
-        .then(complete=>console.log("complete"))
+        .then(response =>{console.log(response.data)
+            //TODO get user information and update as much as possible, run question sort function after this.
+        })
         .catch(error=>console.warn(`Error:${error.response.headers.status}, an error occured retrieving your github username`));
     }
 }
