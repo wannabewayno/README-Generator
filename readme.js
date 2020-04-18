@@ -77,13 +77,14 @@ function createREADME(readmeData){
         projectName: readmeData.projectName,
         email: readmeData.email,
     }
-
+    
     if (!readmeData.hasLICENSE){
         createLICENSE(readmeData.license,stamps)
     }
 
     readmeFile = ``;
     readmeFile += NAVBAR(readmeData);
+    readmeFile += badges(readmeData.languages,readmeData.licenseName)
     readmeFile += `<br>\n<br>\n # ${readmeData.projectName}\n`;
     readmeFile += ` > ${readmeData.description} \n`
     readmeFile += motivation(readmeData.motivation);
@@ -127,6 +128,29 @@ function NAVBAR(readmeData){
     navbar += `</p>\n`
     return navbar;
 }
+
+function badges(languages,license){
+   let badges = `<p align="center">\n`;
+    badges += `<img src="https://img.shields.io/badge/<License>-<${license}>-<blue>"/> `
+    Total = 0;
+    if (typeof(languages)==="string"){
+        badges += `<img src="https://img.shields.io/badge/<${key}>-<flex>-<yellow>"/> `
+    } else {
+        if (typeof(languages)==="object"){
+            for (let key in languages){
+            Total += languages[key];
+            }
+        }
+        if (typeof(languages)==="object"){
+            for (let key in languages){
+                badges += `<img src="https://img.shields.io/badge/<${key}>-<${Math.round(languages[key]/Total)*100}%>-<yellow>"/> `
+            }
+        }
+    }
+    badges += `</p>\n`
+    return badges;
+}
+
 
 function motivation(motivation){
     if(motivation!==null||motivation!==''){

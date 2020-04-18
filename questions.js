@@ -28,6 +28,11 @@ questions.description = {
     name:"description",
     message:"write a short description about your project (1 - 2 sentances)",
 }
+questions.languages = {
+    type:"input",
+    name:"languages",
+    message:"What was the main coding language used in this project?",
+}
 questions.isDeployed = {
     type:'confirm',
     name:'isDeployed',

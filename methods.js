@@ -17,7 +17,7 @@ function checkForREADME(array){ // checks an array to see if the text README.md 
         return false;
     }
 } 
-function checkForREADME(array){ // checks an array to see if the text README.md is present, returns true or false accordingly.
+function checkForLICENSE(array){ // checks an array to see if the text README.md is present, returns true or false accordingly.
     if(array.indexOf(`LICENSE.md`)!==-1||array.indexOf(`LICENSE.txt`)!==-1){
         return true;
     } else {
@@ -44,7 +44,8 @@ methods.readmeData = {
     isInstallation:null,
     isUsage:null,
     isContributing:null,
-    isLogo:null
+    isLogo:null,
+    languages:null
 }
 methods.readmeData.counters={
     installationSteps:0,
@@ -77,6 +78,13 @@ methods.addlicense = answer => {return new Promise((resolve,reject)=>{
         reject();
     })
     .catch(()=> {throw new Error("error occured adding a license")})
+}
+// -------------------------------- looks for addlicense in answers -------------------------------
+methods.languages = answer => {return new Promise((resolve,reject)=>{
+    resolve(methods.readmeData.languages = answer);
+    reject();
+})
+.catch(()=> {throw new Error("error occured adding languages")})
 }
 // -------------------------------- looks for licenseOwner in answers -------------------------------
 methods.licenseOwner = answer => {
@@ -464,7 +472,6 @@ methods.chooseRepo = answer => {
     .then(answer=>{
         // Overides all repository information with the selected repository information.
         methods.readmeData.repositories = methods.readmeData.repositories[answer];
-
         const repoInfo = methods.readmeData.repositories;
         // extracts useful information to build the README file and add it to the global 'readmeData' object
         methods.readmeData.projectName = repoInfo.name;
