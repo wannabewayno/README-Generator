@@ -18,18 +18,18 @@ module.exports = readmeTemplate = `
     {{scope}}
 ### What does this try to solve?
     {{solutions}}
-##{{deployed}}
+## {{deployed}}
 
 <h3 id="installation">Installation</h3>
-{{installation}}
+    {{installation}}
 <h3 id="usage">Usage<h3>
-{{usage}}
+    {{usage}}
 <h3 id="contributing">Contributing</h3>
-{{contributing}}
+    {{contributing}}
 <h3 id="license">License</h3>
-{{license}}
+    {{license}}
 <h3 id="questions">Questions</h3>
-{{questions}}
+    {{questions}}
 `
 
 fs.writeFile('README.md',readmeTemplate,(err)=>{
