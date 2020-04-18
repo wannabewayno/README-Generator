@@ -7,8 +7,6 @@
 </p>
 <p align="center">
 <img src="https://img.shields.io/badge/License-undefined-blue"/> <img src="https://img.shields.io/badge/JavaScript-1-yellow"/> </p>
-<br>
-<br>
  # README-Generator
  > Node.js plugin that generates a README for your repository or project 
 ### Motivation 
