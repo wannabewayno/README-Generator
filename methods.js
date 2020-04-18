@@ -17,18 +17,27 @@ function checkForREADME(array){ // checks an array to see if the text README.md 
         return false;
     }
 } 
+function checkForREADME(array){ // checks an array to see if the text README.md is present, returns true or false accordingly.
+    if(array.indexOf(`LICENSE.md`)!==-1||array.indexOf(`LICENSE.txt`)!==-1){
+        return true;
+    } else {
+        return false;
+    }
+} 
 
 // --------------------------------- create a place to store extracted data ----------------------------------------------
 methods.readmeData = {
     username:null,
     projectName:null,
     description:null,
+    name:null,
     license:null,
     licenseOwner:null,
     isDeployed:null,
     email:null,
     avatar:null,
     hasREADME:null,
+    hasLICENSE:null,
     motivation:null,
     scope:null,
     solving:null,
@@ -68,6 +77,14 @@ methods.addlicense = answer => {return new Promise((resolve,reject)=>{
         reject();
     })
     .catch(()=> {throw new Error("error occured adding a license")})
+}
+// -------------------------------- looks for licenseOwner in answers -------------------------------
+methods.licenseOwner = answer => {
+    return new Promise((resolve,reject)=>{
+    resolve(methods.readmeData.licenseOwner = answer);
+    reject();
+})
+.catch(()=> {throw new Error("error occured adding a license Owner")})
 }
 // --------------------------------- looks for description in answers -----------------------------
 methods.description = answer => {return new Promise((resolve,reject)=>{
@@ -167,7 +184,6 @@ methods.isInstallation = answer => {
                 const offset = methods.readmeData.counters.installationSteps;
                 const questionOrderIndex = questions.order.indexOf(questions.addInstallStep);
                 questions.order.splice(questionOrderIndex+(offset*2)-1,0,questions.confirmInstallStep);
-                console.log(methods.readmeData.isInstallation[`step${methods.readmeData.counters.installationSteps}`]);
             })
             .catch(()=> {throw new Error("error occured adding an installation step")})
         }
@@ -423,10 +439,11 @@ methods.startFrom = answer => {
         })
         .then(response =>{
             const userInfo = response.data;
-
-            methods.readmeData.hasREADME = false //assuming if we're going down this route, you don't have or will overide your README
+            methods.readmeData.hasLICENSE = false;
+            methods.readmeData.hasREADME = false; //assuming if we're going down this route, you don't have or will overide your README
             methods.readmeData.email = userInfo.email;  // finds public user email if listed
             methods.readmeData.avatar = userInfo.avatar_url; //gets users avatar
+            methods.readmeData.name = userInfo.name; // get's user's name
             
             // finds all information in readmeData that is null, and asks the user to fill in this information.
             for (const key in methods.readmeData) {
@@ -467,12 +484,14 @@ methods.chooseRepo = answer => {
     .then(promises=>Promise.all(promises))   // waits for all promises to be resolved and then continues
     .then(resolvedPromises=>{
         // extracts useful information from second round of API calls.
+        methods.readmeData.name = resolvedPromises[0].name;
         methods.readmeData.licenseOwner = resolvedPromises[0].name;
         methods.readmeData.email = resolvedPromises[0].data.email;  // finds public user email if listed
         methods.readmeData.avatar = resolvedPromises[0].data.avatar_url; //gets users avatar
         methods.readmeData.languages = resolvedPromises[1].data;   // coding languages in this project
         methods.readmeData.content = resolvedPromises[2].data.map(object=>object.name) // top level contents, used to check if a README already exists
         methods.readmeData.hasREADME = checkForREADME(methods.readmeData.content); // checks for a previously exisiting README and saves the outcome to the readmeData object
+        methods.readmeData.hasLICENSE = checkForLICENSE(methods.readmeData.content);
 
         // finds all information in readmeData that is null, and asks the user to fill in this information.
         for (const key in methods.readmeData) {

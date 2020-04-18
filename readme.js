@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const fs = require('fs');
 const axios = require("axios");
 const Rx = require("rxjs");
 const questions = require("./questions.js");
@@ -41,7 +42,164 @@ function nextQuestion(questionIndex){
 prompts.next(nextQuestion(questionIndex));
 
 
-function createREADME(readmeData){
+function createLICENSE(license,stamps){
+    const Chosenlicense = require(`./license-boilerplate/${license}`);
+    methods.readmeData.licenseName = Chosenlicense.name;
+    function stamp(license,stamps){
+        let stampStart = 0;  
+        while (stampStart !== -1){
+            //Guard Clause
+            stampStart = license.indexOf("{{");
+            if (stampStart === -1){
+                return license;
+            }
+            stampEnd = license.indexOf("}}",stampStart);
+            stampName = license.substring(stampStart+2,stampEnd);
+            license = license.replace(`{{${stampName}}}`,stamps[stampName]);
+        }
+        return license;
+    }
     
+    if (Chosenlicense.requireStamping){
+        Chosenlicense.license = stamp(Chosenlicense.license,stamps);
+    }
+    fs.writeFile('LICENSE.md',Chosenlicense.license,(err)=>{
+        if (err) throw err;
+        console.log("Success! this license has been added to your repo");
+    })
+}
 
+
+function createREADME(readmeData){
+    stamps = {
+        year: new Date().getFullYear(),
+        owner: readmeData.licenseOwner,
+        projectName: readmeData.projectName,
+        email: readmeData.email,
+    }
+
+    if (!readmeData.hasLICENSE){
+        createLICENSE(readmeData.license,stamps)
+    }
+
+    readmeFile = ``;
+    readmeFile += NAVBAR(readmeData);
+    readmeFile += `<br>\n<br>\n # ${readmeData.projectName}\n`;
+    readmeFile += ` > ${readmeData.description} \n`
+    readmeFile += motivation(readmeData.motivation);
+    readmeFile += scope(readmeData.scope);
+    readmeFile += solve(readmeData.solving);
+    readmeFile += deployed(readmeData.isDeployed,readmeData.projectName);
+    readmeFile += Installation(readmeData.isInstallation);
+    readmeFile += Usage(readmeData.isUsage);
+    readmeFile += Contributing(readmeData.isContributing);
+    readmeFile += License(stamps,readmeData.licenseName);
+    readmeFile += Questions(readmeData.email,readmeData.username,readmeData.name,readmeData.avatar);
+
+    fs.writeFile('README.md',readmeFile,(err)=>{
+    if (err) throw err;
+    console.log("Success! this README has been added to your repo");
+    });
+
+}
+
+function NAVBAR(readmeData){
+    let navbar ='<p align="center">\n';
+    navComponents = {
+        Installation:readmeData.isInstallation,
+        Usage:readmeData.isUsage,
+        Contributing:readmeData.isContributing,
+        License:readmeData.license,
+        Questions:true,
+        Logo:readmeData.isLogo
+    }
+
+    if(navComponents.Logo!==null){
+        navbar+= `<img src=${navComponents.Logo} width="300"/>
+        <br>`
+    }
+
+    for (const components in navComponents){
+        if(navComponents[components]!==null && components !== "Logo"){
+            navbar+= `<a href="#${components}">${components}</a>\n`
+        }
+    }
+    navbar += `</p>\n`
+    return navbar;
+}
+
+function motivation(motivation){
+    if(motivation!==null||motivation!==''){
+        return `### Motivation \n ${motivation}\n`
+    }
+    return '';
+}
+function scope(scope){
+    if(scope!==null && scope!==''){
+        return `### Scope \n ${scope}\n`
+    }
+    return '';
+}
+function solve(solving){
+    if(solving!==null && solving!==''){
+        return `### Aims to solve? \n ${solving}\n`
+    }
+    return '';
+}
+function deployed(deployed,projectName){
+    if(deployed!==null && deployed!==''){
+        return `## Deployed Application \n > Click the link to see visit the application <a href="${deployed}">${projectName}</a>\n`
+    } else {
+        return '';
+    }
+    
+}
+function Installation(installation){
+    if(installation===null||installation===''){
+        return '\n';
+    }
+    if (typeof(installation)==="string"){
+        return `## Installation \n ${installation}\n`
+    } else {
+        let steps = `## Installation \n`;
+        for (let key in installation){
+            steps += `   * ${installation[key]}\n`
+        }
+        return steps;
+    }
+}
+function Usage(usage){
+    if(usage===null || usage===''){
+        return '\n';
+    }
+    if (typeof(usage)==="string"){
+        return `## Usage \n ${usage}\n`
+    } else {
+        let steps = `## Usage\n`
+        for(let key in usage){
+            steps += `   * ${usage[key]}\n`
+        }
+    }
+}
+function Contributing(contributing){
+    if(contributing===null||contributing===''){
+        return '\n';
+    }
+    if (typeof(contributing)==="string"){
+        return `## Contributing \n ${contributing}\n`
+    } else {
+        let steps = `## Contributing \n`;
+        for(let key in contributing){
+            steps += `   * ${contributing[key]}\n`
+        }
+    }
+}
+function License(stamps,licenseName){
+    if(licenseName===null||licenseName===''){
+        return '';
+    }
+        return `## License\n Copyright \u00A9 ${stamps.year} ${stamps.owner} under the ${licenseName}\n`
+}
+function Questions(email,username,name,avatar){
+    return `## Questions \n If you any questions about this project you can open an issue, contact ${username} or get in touch with \n ${name} at ${email} <img src="${avatar}" alt="avatar"style=" border-radius: 15px" width="50"/>`
 }

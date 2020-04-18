@@ -1,31 +1,35 @@
-
 <p align="center">
-    <img src={{logoPath}} width="300" alt="{{projectName}} logo">
+<img src="./assets/logo/logo.jfif" width="300" alt="logo">
     <br>
-    <a href="#installation">Installation</a> |
-    <a href="#usage">Usage</a> |
-    <a href="#contributing">Contributing</a> |
-    <a href="#license">License</a> |
-    <a href="#questions">Questions</a> 
+<a href="#Installation">Installation</a>
+<a href="#Usage">Usage</a>
+<a href="#Contributing">Contributing</a>
+<a href="#License">License</a>
+<a href="#Questions">Questions</a>
 </p>
-
-# {{projectName}}
-> {{description}} 
-### Motivation
-{{motivation}}
-### Scope
-{{scope}}
-### What does this try to solve?
-{{solutions}}
-## {{deployed}}
-
-## Installation
-{{installation}}
+<br>
+<br>
+ # ssadssdfdsfds
+ > sdfsdfasdfdsf 
+### Motivation 
+ motivation
+### Scope 
+ scope pf project
+### Aims to solve? 
+ lots of things
+## Deployed Application 
+ > Click the link to see visit the application <a href="ssadfassdfdsf">ssadssdfdsfds</a>
+## Installation 
+   * step1
+   * step2
+   * step3
+   * step4
 ## Usage 
-{{usage}}
-## Contributing
-{{contributing}}
+ HAHAH
+## Contributing 
+ LOLOLOLOL
 ## License
-{{license}}
+ Copyright © 2020 sfsadfsdfdsf under the University of Illinois/NCSA Open Source License
 ## Questions 
-{{questions}}
+ If you any questions about this project you can open an issue, contact wannabewayno or get in touch with 
+ Wayne at email <img src="https://avatars2.githubusercontent.com/u/60007468?v=4" alt="avatar"style=" border-radius: 15px" width="50"/>
