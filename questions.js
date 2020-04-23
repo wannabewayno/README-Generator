@@ -33,12 +33,12 @@ questions.languages = {
     name:"languages",
     message:"What was the main coding language used in this project?",
 }
-questions.isDeployed = {
+questions.deployed = {
     type:'confirm',
-    name:'isDeployed',
+    name:'deployed|CONFIRM',
     message:'is your application deployed on the web?'
 }
-    questions.deployed = {
+    questions.deployedFollowUp = {
         type:'input',
         name:'deployed',
         message:'Great, provide a href to link your deployed application'
@@ -54,11 +54,11 @@ questions.projectName = {
     name:'projectName',
     message:'what is title of your project?'
 }
-questions.languages = {
-    type:'input',
-    name:'languages',
-    message:'provide a comma seperated list of coding languages used in this project'
-}
+// questions.languages = {
+//     type:'input',
+//     name:'languages',
+//     message:'provide a comma seperated list of coding languages used in this project'
+// }
 questions.chooseRepo = {
     type:'list',
     name:'chooseRepo',
@@ -83,70 +83,76 @@ questions.solving = {
     name:'solving',
     message:'what did this project attempted to solve? (1 - 2 sentences)'
 };
-questions.isInstallation = {
+questions.installation = {
     type:'confirm',
-    name:'isInstallation',
+    name:'installation|CONFIRM',
     message:'Does your project require an Installation?'
 };
-    questions.typeInstallation = {
+    questions.installationFollowUp = {
         type:'list',
-        name:'typeInstallation',
+        name:'installation|SWITCH',
         message:'choose a way to describe your installation',
         choices:[
             {
                 name:"It's a brief sentence",
-                value:'sentence'
+                value:'installation|Sentence'
             },
             {
                 name:"I'd prefer to write step by step instructions",
-                value:'steps'
+                value:'installation|Step'
             }
         ]
     }   
-        questions.installSentence = {
+        questions.installationSentence = {
         type:'input',
-        name:'installSentence',
+        name:'installation',
         message:"Describe how to install your project (1 - 2 sentences)"
         }   
 
-        questions.addInstallStep = {
+        questions.installationStep = {
             type:'input',
-            name:'addInstallStep',
-            message:"add a step (no need to label the steps, we got you)"
+            name:'installationStep|LOOP',
+            message:"add the first step (no need to label the steps, we got you)"
         } 
-            questions.confirmInstallStep = {
+            questions.installationStepLOOP = {
                 type:'confirm',
-                name:'confirmInstallStep',
+                name:'installationStep|CONFIRM',
                 message:'add another step?'
             }
-questions.isUsage = {
+            questions.installationStepFollowUp = {
+                type:'input',
+                name:'installationStep|LOOP',
+                message:'add a step (again; no labels, we still got you holmes)'
+            }
+
+questions.usage = {
     type:'confirm',
-    name:'isUsage',
+    name:'usage|CONFIRM',
     message:'Does your project require an explanation on how to use?'
 };
-    questions.typeUsage = {
+    questions.usageFollowUp = {
         type:'list',
-        name:'typeUsage',
+        name:'usage|FORK',
         message:'choose a way to describe the Usage of this project',
         choices:[
             {
                 name:"It's a brief sentence",
-                value:'sentence'
+                value:'usage|Sentence'
             },
             {
                 name:"I'd prefer to write step by step instructions",
-                value:'steps'
+                value:'usag|Step'
             }
         ]
     }
         questions.usageSentence = {
         type:'input',
-        name:'usageSentence',
+        name:'usage',
         message:"Describe how to use this project (1 - 2 sentences)"
         }   
-        questions.addUsageStep = {
+        questions.usageStep = {
             type:'input',
-            name:'addUsageStep',
+            name:'usageStep',
             message:"add a step (no need to label the steps, we got you)"
         } 
             questions.confirmUsageStep = {
@@ -155,34 +161,34 @@ questions.isUsage = {
                 message:'add another step?'
             }
 
-questions.isContributing = {
+questions.contributing = {
     type:'confirm',
-    name:'isContributing',
+    name:'CONFIRMcontributing',
     message:'Does your project require information on how to contribute?'
 };
-    questions.typeContributing = {
+    questions.contributingFollowUp = {
         type:'list',
-        name:'typeContributing',
+        name:'FORKcontributing',
         message:'choose a way to describe how to contribute',
         choices:[
             {
                 name:"It's a brief sentence",
-                value:'sentence'
+                value:'contributing|Sentence'
             },
             {
                 name:"I'd prefer to write step by step instructions",
-                value:'steps'
+                value:'contributing|Step'
             }
         ]
     }
         questions.contributingSentence = {
         type:'input',
-        name:'contributingSentence',
+        name:'contributing',
         message:"Describe how to contribute to this project (1 - 2 sentences)"
         }   
-        questions.addContributingStep = {
+        questions.contributingStep = {
             type:'input',
-            name:'addContributingStep',
+            name:'contributingStep',
             message:"add a step (no need to label the steps, we got you)"
         } 
             questions.confirmContributingStep = {
@@ -190,12 +196,12 @@ questions.isContributing = {
                 name:'confirmContributingStep',
                 message:'add another step?'
             }
-questions.isLogo = {
+questions.logo = {
     type:'confirm',
-    name:'isLogo',
+    name:'CONFIRMlogo',
     message:'Would you like to add a Logo to your README?'
 }
-    questions.logo = {
+    questions.logoFollowUp = {
         type:'input',
         name:'logo',
         message:'Great, provide a path img src, relative or a link'
@@ -208,7 +214,7 @@ questions.licenseOwner = {
 
 questions.license = {
     type:"list",
-    name:"addlicense",
+    name:"license",
     message:"Pick a license for your project",
     pageSize:24,
     choices:[

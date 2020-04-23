@@ -10,7 +10,7 @@ const prompts = new Rx.Subject();
 //initialise the prompt module by subscribing to it
 inquirer.prompt(prompts).ui.process.subscribe(async function(answer){
 
-    const result = await methods[answer.name](answer.answer).catch((error)=>{throw error})
+    const result = await methods.saveData(answer).catch((error)=>{throw error})
     questionIndex++;
     prompts.next(nextQuestion(questionIndex));
 }
@@ -70,12 +70,15 @@ function createLICENSE(license,stamps){
 
 
 function createREADME(readmeData){
+    console.log(readmeData);
     stamps = {
         year: new Date().getFullYear(),
         owner: readmeData.licenseOwner,
         projectName: readmeData.projectName,
         email: readmeData.email,
     }
+    console.log(readmeData.license);
+    console.log(typeof(readmeData.license));
     if(typeof(readmeData.license)==="object"){
         readmeData.licenseName = readmeData.license.name;
         readmeData.license = readmeData.license.key;
@@ -136,7 +139,7 @@ function badges(languages,license){
     badges += `<img src="https://img.shields.io/badge/License-${license}-blue"/> `
     Total = 0;
     if (typeof(languages)==="string"){
-        badges += `<img src="https://img.shields.io/badge/${key}-flex-yellow"/> `
+        badges += `<img src="https://img.shields.io/badge/${languages}-flex-yellow"/> `
     } else {
         if (typeof(languages)==="object"){
             for (let key in languages){
